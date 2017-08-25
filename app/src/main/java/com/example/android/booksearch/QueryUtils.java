@@ -79,8 +79,19 @@ public final class QueryUtils {
                 // Extract the value for the key called "title"
                 String title = volumeInfo.getString("title");
 
+                JSONArray authorList = volumeInfo.getJSONArray("authors");
+
+                //String author = authorList.getString(0);
+                String author = "";
+
+                for (int j = 0; j<authorList.length(); j++) {
+
+                    author = author + authorList.getString(j) + " ";
+                }
+
+
                 // Extract the value for the key called "publisher"
-                String author = volumeInfo.getString("publisher");
+                //String author = volumeInfo.getString("publisher");
 
                 // Create a new {@link Book} object with the title and author
                 // from the JSON response.

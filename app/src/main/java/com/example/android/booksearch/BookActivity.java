@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +27,14 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
      * URL for book list from google books site
      */
     private static final String BOOK_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=2&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+            "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+
+    private static final String  FIXED_URL =
+            "https://www.googleapis.com/books/v1/volumes?q=";
+
+    private static final String  MY_KEY =
+            "&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+
 
 
     /**
@@ -89,11 +98,31 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
+
+        // Find the View that shows the search button
+        Button bookSearch = (Button) findViewById(R.id.search_button);
+
+        // Set a click listener on that button
+        bookSearch.setOnClickListener(new View.OnClickListener() {
+
+            // The code in this method will be executed when the search button is clicked on.
+            @Override
+            public void onClick(View view) {
+
+                EditText categoryField = (EditText) findViewById(R.id.category_field);
+                String category = categoryField.getText().toString();
+                Log.v(LOG_TAG, "Category is: " + category);
+
+            }
+
+
+        });
+
     }
 
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
-        Log.v(LOG_TAG, "Our current URL is :" +BOOK_REQUEST_URL);
+        Log.v(LOG_TAG, "Our current URL is :" + BOOK_REQUEST_URL);
         // Create a new loader for the given URL
         return new BookLoader(this, BOOK_REQUEST_URL);
     }
@@ -101,13 +130,13 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> books) {
 
-        Log.v(LOG_TAG, "On load finished Books is :" +books);
+        Log.v(LOG_TAG, "On load finished Books is :" + books);
 
         // Hide loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No bookss found."
+        // Set empty state text to display "No books found."
         mEmptyStateTextView.setText(R.string.no_books);
 
         // Clear the adapter of previous book data
