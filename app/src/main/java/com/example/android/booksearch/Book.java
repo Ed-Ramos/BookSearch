@@ -14,8 +14,8 @@ public class Book {
 
 
     public Book(String Title, String Author) {
-        Title = mTitle;
-        Author = mAuthor;
+        mTitle = Title;
+        mAuthor = Author;
     }
 
     public String getTitle() {
