@@ -26,14 +26,18 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
     /**
      * URL for book list from google books site
      */
-    private static final String BOOK_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+    //private static final String BOOK_REQUEST_URL =
+           // "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
 
     private static final String  FIXED_URL =
             "https://www.googleapis.com/books/v1/volumes?q=";
 
     private static final String  MY_KEY =
             "&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+
+    private String category;
+
+    private String BOOK_REQUEST_URL;
 
 
 
@@ -110,13 +114,25 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onClick(View view) {
 
                 EditText categoryField = (EditText) findViewById(R.id.category_field);
-                String category = categoryField.getText().toString();
+                category = categoryField.getText().toString().trim();
+                BOOK_REQUEST_URL = buildURL(category);
+                //BOOK_REQUEST_URL = FIXED_URL + category + MY_KEY;
+                Log.v(LOG_TAG, "Fixed_URL: " + FIXED_URL);
                 Log.v(LOG_TAG, "Category is: " + category);
+                Log.v(LOG_TAG, "My Key is: " + MY_KEY);
+                Log.v(LOG_TAG, "Book Request URL is: " + BOOK_REQUEST_URL);
+                getLoaderManager().restartLoader(BOOK_LOADER_ID, null, BookActivity.this);
 
             }
 
-
         });
+
+    } //end of onCreate method
+
+    private String buildURL(String inputString) {
+
+        StringBuilder url = new StringBuilder(FIXED_URL);
+        return url.append(inputString.replace(" ", "+")).append(MY_KEY).toString();
 
     }
 
@@ -155,4 +171,4 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter.clear();
     }
 
-}
+} //end of class declaration
