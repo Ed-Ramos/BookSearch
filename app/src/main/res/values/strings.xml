@@ -7,10 +7,13 @@
     <!-- Text to display in the list when there are no books [CHAR LIMIT=NONE] -->
     <string name="no_books"> No books found</string>
 
+    <!-- Text to display in Edittext box [CHAR LIMIT=NONE] -->
     <string name="category">Enter category or phrase</string>
 
+    <!-- Text to display in search button [CHAR LIMIT=NONE] -->
     <string name="search">Search</string>
 
+    <!-- Text to display in the list at start to indicate no books have been searched yet [CHAR LIMIT=NONE] -->
     <string name="no_books_searched">Click button above to search</string>
 
 </resources>

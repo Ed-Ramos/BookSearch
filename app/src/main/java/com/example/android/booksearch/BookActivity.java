@@ -100,6 +100,7 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
                 // If there is a network connection, fetch data
                 if (networkInfo != null && networkInfo.isConnected()) {
 
+                    mEmptyStateTextView.setText("");
                     loadingIndicator.setVisibility(View.VISIBLE);
 
                     EditText categoryField = (EditText) findViewById(R.id.category_field);

@@ -81,17 +81,21 @@ public final class QueryUtils {
 
                 JSONArray authorList = volumeInfo.getJSONArray("authors");
 
-                //String author = authorList.getString(0);
+                //Initializing Author to empty string;
                 String author = "";
 
-                for (int j = 0; j<authorList.length(); j++) {
+                for (int j = 0; j < authorList.length(); j++) {
+                    //Iterate through array and build author string
 
-                    author = author + authorList.getString(j) + " ";
-                }
+                    if (j!=authorList.length()-1) {
+                        author = author + authorList.getString(j) + " and ";
 
+                    } else {
 
-                // Extract the value for the key called "publisher"
-                //String author = volumeInfo.getString("publisher");
+                        author = author + authorList.getString(j);
+                    }
+
+                }  //end of authorList iteration
 
                 // Create a new {@link Book} object with the title and author
                 // from the JSON response.
@@ -99,7 +103,8 @@ public final class QueryUtils {
 
                 // Add the new {@link Book} to the list of bookss.
                 books.add(book);
-            }
+
+            } //end of bookArray iteration
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -210,10 +215,6 @@ public final class QueryUtils {
         // Return the list of {@link Book}s
         return books;
     }
-
-
-
-
 
 
 }
