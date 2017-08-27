@@ -1,4 +1,4 @@
-#Sun Aug 27 14:25:17 EDT 2017
+#Sun Aug 27 19:26:58 EDT 2017
 base.0=C\:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=C\:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

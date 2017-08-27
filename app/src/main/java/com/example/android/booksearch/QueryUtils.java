@@ -75,24 +75,31 @@ public final class QueryUtils {
                 // Extract the value for the key called "title"
                 String title = volumeInfo.getString("title");
 
-                JSONArray authorList = volumeInfo.getJSONArray("authors");
+                String author;
 
-                //Initializing Author to empty string;
-                String author = "";
+                if (volumeInfo.has("authors")) {
 
-                //Iterate through array and build author string
-                for (int j = 0; j < authorList.length(); j++) {
+                    JSONArray authorList = volumeInfo.getJSONArray("authors");
+                    //Initializing author to empty string;
+                    author = "";
 
-                    //add "and" if not last author
-                    if (j != authorList.length() - 1) {
-                        author = author + authorList.getString(j) + " and ";
+                    //Iterate through array and build author string
+                    for (int j = 0; j < authorList.length(); j++) {
 
-                    } else {
-                        //when last author don't add "and"
-                        author = author + authorList.getString(j);
-                    }
+                        //add "and" if not last author
+                        if (j != authorList.length() - 1) {
+                            author = author + authorList.getString(j) + " and ";
 
-                }  //end of authorList iteration
+                        } else {
+                            //when last author don't add "and"
+                            author = author + authorList.getString(j);
+                        }
+
+                    }  //end of authorList iteration
+                } else {
+
+                    author = "unknown author";
+                }
 
                 // Create a new {@link Book} object with the title and author
                 // from the JSON response.

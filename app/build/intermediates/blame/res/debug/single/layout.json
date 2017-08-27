@@ -144,12 +144,12 @@
         "source": "C:\\Users\\Edwin\\.android\\build-cache\\22d7b7895c7d7135d6a089c6b457a9f6233bce96\\output\\res\\layout\\notification_template_custom_big.xml"
     },
     {
-        "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
-        "source": "C:\\Users\\Edwin\\.android\\build-cache\\22d7b7895c7d7135d6a089c6b457a9f6233bce96\\output\\res\\layout\\notification_template_media.xml"
-    },
-    {
         "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\layout\\book_list_item.xml",
         "source": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\src\\main\\res\\layout\\book_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\Edwin\\.android\\build-cache\\22d7b7895c7d7135d6a089c6b457a9f6233bce96\\output\\res\\layout\\notification_template_media.xml"
     },
     {
         "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
