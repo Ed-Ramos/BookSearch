@@ -19,6 +19,7 @@
         android:background="@drawable/edit_text_style"
         android:ellipsize="start"
         android:hint="@string/category"
+        android:textSize="24sp"
         android:inputType="textCapWords" />
 
     <Button
@@ -35,7 +36,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#79e9de"
+        android:background="#d1e0ff"
         android:layout_below="@+id/search_button"
         />
 

@@ -19,26 +19,26 @@ import java.util.List;
 
 public class BookActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
 
-    /** Tag for log messages */
+    /**
+     * Tag for log messages
+     */
     private static final String LOG_TAG = BookLoader.class.getName();
-
 
     /**
      * URL for book list from google books site
      */
     //private static final String BOOK_REQUEST_URL =
-           // "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+    // "https://www.googleapis.com/books/v1/volumes?q=cancer%20treatment&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
 
-    private static final String  FIXED_URL =
+    private static final String FIXED_URL =
             "https://www.googleapis.com/books/v1/volumes?q=";
 
-    private static final String  MY_KEY =
-            "&maxResults=10&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
+    private static final String MY_KEY =
+            "&maxResults=15&key=AIzaSyDq4yY0HJQIZJqsi3G35Yu3zgGujxmBlSs";
 
     private String category;
 
     private String BOOK_REQUEST_URL;
-
 
     /**
      * Constant value for the book loader ID. We can choose any integer.
@@ -56,7 +56,6 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     private TextView mEmptyStateTextView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,21 +64,19 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
         // Find a reference to the {@link ListView} in the layout
         ListView listView = (ListView) findViewById(R.id.list);
 
-
         // Create a new adapter that takes an empty list of books as input
         mAdapter = new BookAdapter(this, new ArrayList<Book>());
 
         listView.setAdapter(mAdapter);
 
-
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyStateTextView);
 
-
-          // Find the View that shows the search button
-        Button bookSearch = (Button) findViewById(R.id.search_button);
-
+        // Upon App start, indicate to user that no books have been search yet
         mEmptyStateTextView.setText(R.string.no_books_searched);
+
+        // Find the View that shows the search button
+        Button bookSearch = (Button) findViewById(R.id.search_button);
 
         // Set a click listener on that button
         bookSearch.setOnClickListener(new View.OnClickListener() {
@@ -100,19 +97,26 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
                 // If there is a network connection, fetch data
                 if (networkInfo != null && networkInfo.isConnected()) {
 
+                    // clear the Empty State text
                     mEmptyStateTextView.setText("");
+
+                    // show progress bar until books are loaded
                     loadingIndicator.setVisibility(View.VISIBLE);
 
+                    // Get the text that was entered in EditText box
                     EditText categoryField = (EditText) findViewById(R.id.category_field);
                     category = categoryField.getText().toString().trim();
+
+                    // call helper method to build the final URL
                     BOOK_REQUEST_URL = buildURL(category);
+
                     // restart loader if one is running or start a new one if it is not running
                     getLoaderManager().restartLoader(BOOK_LOADER_ID, null, BookActivity.this);
 
-                    } else {
+                } else {
                     // Otherwise, display error
                     // First, hide loading indicator so error message will be visible
-                   // View loadingIndicator = findViewById(R.id.loading_indicator);
+                    // View loadingIndicator = findViewById(R.id.loading_indicator);
                     loadingIndicator.setVisibility(View.GONE);
 
                     // Update empty state with no connection error message
@@ -120,7 +124,7 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 }
 
-            }
+            } //end of OnClick method
 
         });
 
@@ -146,11 +150,12 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Log.v(LOG_TAG, "On load finished Books is :" + books);
 
-        // Hide loading indicator because the data has been loaded
+        // Hide progress bar loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No books found."
+        // Set empty state text to display "No books found." If books exist and get shown
+        // then this display wont be seen
         mEmptyStateTextView.setText(R.string.no_books);
 
         // Clear the adapter of previous book data

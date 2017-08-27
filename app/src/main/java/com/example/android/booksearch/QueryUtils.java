@@ -1,9 +1,5 @@
 package com.example.android.booksearch;
 
-/**
- * Created by Edwin on 8/22/2017.
- */
-
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -84,14 +80,15 @@ public final class QueryUtils {
                 //Initializing Author to empty string;
                 String author = "";
 
+                //Iterate through array and build author string
                 for (int j = 0; j < authorList.length(); j++) {
-                    //Iterate through array and build author string
 
-                    if (j!=authorList.length()-1) {
+                    //add "and" if not last author
+                    if (j != authorList.length() - 1) {
                         author = author + authorList.getString(j) + " and ";
 
                     } else {
-
+                        //when last author don't add "and"
                         author = author + authorList.getString(j);
                     }
 
@@ -101,7 +98,7 @@ public final class QueryUtils {
                 // from the JSON response.
                 Book book = new Book(title, author);
 
-                // Add the new {@link Book} to the list of bookss.
+                // Add the new {@link Book} to the list of books.
                 books.add(book);
 
             } //end of bookArray iteration
@@ -113,7 +110,7 @@ public final class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the book JSON results", e);
         }
 
-        // Return the list of bookss
+        // Return the list of books
         return books;
 
     }
@@ -175,7 +172,6 @@ public final class QueryUtils {
         return jsonResponse;
     }
 
-
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
@@ -215,6 +211,5 @@ public final class QueryUtils {
         // Return the list of {@link Book}s
         return books;
     }
-
 
 }

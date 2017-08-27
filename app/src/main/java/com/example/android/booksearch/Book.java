@@ -1,9 +1,5 @@
 package com.example.android.booksearch;
 
-/**
- * Created by Edwin on 8/21/2017.
- */
-
 public class Book {
 
     /** Value that represents title of book*/
@@ -11,7 +7,6 @@ public class Book {
 
     /** Value that represents Author(s) of book*/
     private String mAuthor;
-
 
     public Book(String Title, String Author) {
         mTitle = Title;
