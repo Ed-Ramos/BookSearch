@@ -40,7 +40,6 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
     private String BOOK_REQUEST_URL;
 
 
-
     /**
      * Constant value for the book loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
@@ -72,39 +71,15 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
 
         listView.setAdapter(mAdapter);
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyStateTextView);
 
 
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
-
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(BOOK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
-        }
-
-
-        // Find the View that shows the search button
+          // Find the View that shows the search button
         Button bookSearch = (Button) findViewById(R.id.search_button);
+
+        mEmptyStateTextView.setText(R.string.no_books_searched);
 
         // Set a click listener on that button
         bookSearch.setOnClickListener(new View.OnClickListener() {
@@ -113,21 +88,43 @@ public class BookActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View view) {
 
-                EditText categoryField = (EditText) findViewById(R.id.category_field);
-                category = categoryField.getText().toString().trim();
-                BOOK_REQUEST_URL = buildURL(category);
-                //BOOK_REQUEST_URL = FIXED_URL + category + MY_KEY;
-                Log.v(LOG_TAG, "Fixed_URL: " + FIXED_URL);
-                Log.v(LOG_TAG, "Category is: " + category);
-                Log.v(LOG_TAG, "My Key is: " + MY_KEY);
-                Log.v(LOG_TAG, "Book Request URL is: " + BOOK_REQUEST_URL);
-                getLoaderManager().restartLoader(BOOK_LOADER_ID, null, BookActivity.this);
+                View loadingIndicator = findViewById(R.id.loading_indicator);
+
+                // Get a reference to the ConnectivityManager to check state of network connectivity
+                ConnectivityManager connMgr = (ConnectivityManager)
+                        getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                // Get details on the currently active default data network
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+                // If there is a network connection, fetch data
+                if (networkInfo != null && networkInfo.isConnected()) {
+
+                    loadingIndicator.setVisibility(View.VISIBLE);
+
+                    EditText categoryField = (EditText) findViewById(R.id.category_field);
+                    category = categoryField.getText().toString().trim();
+                    BOOK_REQUEST_URL = buildURL(category);
+                    // restart loader if one is running or start a new one if it is not running
+                    getLoaderManager().restartLoader(BOOK_LOADER_ID, null, BookActivity.this);
+
+                    } else {
+                    // Otherwise, display error
+                    // First, hide loading indicator so error message will be visible
+                   // View loadingIndicator = findViewById(R.id.loading_indicator);
+                    loadingIndicator.setVisibility(View.GONE);
+
+                    // Update empty state with no connection error message
+                    mEmptyStateTextView.setText(R.string.no_internet_connection);
+
+                }
 
             }
 
         });
 
     } //end of onCreate method
+
 
     private String buildURL(String inputString) {
 

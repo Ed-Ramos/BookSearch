@@ -11,6 +11,13 @@
         android:id="@+id/category_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_style"
+        android:ellipsize="start"
         android:hint="@string/category"
         android:inputType="textCapWords" />
 
@@ -18,14 +25,17 @@
         android:text="@string/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/category_field"
-        android:id="@+id/search_button" />
+        android:paddingBottom="4dp"
+        android:id="@+id/search_button"
+        android:layout_below="@+id/category_field"
+        android:layout_centerHorizontal="true" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/list"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#79e9de"
         android:layout_below="@+id/search_button"
         />
 
@@ -42,6 +52,7 @@
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </RelativeLayout>

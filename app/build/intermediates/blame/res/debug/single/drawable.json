@@ -16,6 +16,10 @@
         "source": "C:\\Users\\Edwin\\.android\\build-cache\\22d7b7895c7d7135d6a089c6b457a9f6233bce96\\output\\res\\drawable\\abc_dialog_material_background.xml"
     },
     {
+        "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\edit_text_style.xml",
+        "source": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\src\\main\\res\\drawable\\edit_text_style.xml"
+    },
+    {
         "merged": "C:\\Users\\Edwin\\Documents\\Android Nano\\BookSearch\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
         "source": "C:\\Users\\Edwin\\.android\\build-cache\\22d7b7895c7d7135d6a089c6b457a9f6233bce96\\output\\res\\drawable\\abc_cab_background_top_material.xml"
     },

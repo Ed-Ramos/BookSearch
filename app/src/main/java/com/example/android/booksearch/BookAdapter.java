@@ -42,7 +42,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         TextView BookAuthorTextView = (TextView) listItemView.findViewById(R.id.book_author_text_view);
 
         BookTitleTextView.setText(bookTitle);
-        BookAuthorTextView.setText(bookAuthor);
+        BookAuthorTextView.setText("By: " + bookAuthor);
 
         return listItemView;
     }
